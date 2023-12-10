@@ -7,6 +7,9 @@ import Divider from "../../components/Divider";
 import { useNavigate } from "react-router-dom";
 import Filters from "./Filters";
 import moment from "moment";
+import {motion} from 'framer-motion';
+
+// const FrameImage = motion(img);
 
 function Home() {
   const [showFilters, setShowFilters] = useState(true);
@@ -103,7 +106,7 @@ function Home() {
         >
           {products?.length === 0 ? (
             <div className="w-full">
-              <h1 className="text-primary text-center">No products found!!</h1>
+              <h1 className="text-primary text-center">Loading...</h1>
             </div>
           ) : (
             products?.map((product) => {
@@ -113,10 +116,12 @@ function Home() {
                   key={product._id}
                   onClick={() => navigate(`/product/${product._id}`)}
                 >
-                  <img
+                  <motion.img
                     src={product.images[0]}
                     className="w-full h-[300px] p-2 rounded-md"
                     alt=""
+                    whileHover={{scale: 1.05}}
+                    transition={{duration: 0.2}}
                   />
                   <div className="px-2 flex flex-col">
                     <h1 className="text-lg font-semibold">{product.name}</h1>
